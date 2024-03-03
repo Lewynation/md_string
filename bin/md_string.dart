@@ -23,6 +23,7 @@ void main(List<String> arguments) async {
     runner.argParser.addFlag(
       abbr: 'v',
       'verbose',
+      defaultsTo: false,
       negatable: false,
       help: 'increase logging',
     );

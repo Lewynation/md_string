@@ -20,7 +20,9 @@ class StringifyMarkDownCommand extends Command {
     final inputFile = argResults?['file'] as String?;
     final inputFolder = argResults?['directory'] as String?;
     final outputFolder = argResults?['output'] as String?;
+    final verbose = (globalResults?['verbose'] as bool?) ?? false;
 
+    _printVerbose(verbose, "\nVerbose printing enabled🔊🔊📢📢");
     if (inputFile == null && inputFolder == null) {
       stdout.writeln('❌❌ Input file or directory not found');
       return;
@@ -51,8 +53,8 @@ class StringifyMarkDownCommand extends Command {
         }
         final outputDirectory = Directory(_getOutputDirectory(outputFolder));
         final files = inputDirectory.listSync();
-        print("\n\n🚀🚀 Converting .md files");
-        print("__________________________\n");
+        _printVerbose(verbose, "\n\n🚀🚀 Converting .md files");
+        _printVerbose(verbose, "__________________________\n");
         for (var file in files) {
           if (file is File) {
             final baseName = p.basenameWithoutExtension(file.path);
@@ -99,5 +101,11 @@ class StringifyMarkDownCommand extends Command {
       outputDirectory.createSync(recursive: true);
     }
     return outputDirectory.path;
+  }
+
+  void _printVerbose(bool verbose, String text) {
+    if (verbose) {
+      print(text);
+    }
   }
 }
