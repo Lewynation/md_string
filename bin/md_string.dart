@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 
@@ -33,8 +31,8 @@ void main(List<String> arguments) async {
       return;
     }
     await runner.run(arguments);
-    stdout.write('Press Enter to exit...');
-    stdin.readLineSync();
+    // stdout.write('Press Enter to exit...');
+    // stdin.readLineSync();
   } on FormatException catch (e) {
     print(e.message);
   }
